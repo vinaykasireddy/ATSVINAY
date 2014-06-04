@@ -1,0 +1,67 @@
+﻿@model ATS.Data.Model.TimeSheetMaster
+
+@{
+    ViewBag.Title = "Create";
+    var listTimeSheetDetail = Model.TimeSheetDetail.ToList();
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    
+    
+    <fieldset>
+        <legend>TimeSheetDetail</legend>
+        <table class="table table-striped table-bordered table-hover">
+            <tr>
+                <th>
+                    @Html.Label("Date", new { @class = "control-label" })
+                </th>
+                <th>
+                    @Html.Label("Start Time", new { @class = "control-label" })
+                </th>
+                <th>
+                    @Html.Label("End Time", new { @class = "control-label" })
+                </th>
+                <th>
+                    @Html.Label("Remarks", new { @class = "control-label" })
+                </th>
+                <th>
+                    @Html.Label("Supporting Documents", new { @class = "control-label" })
+                </th>
+
+                <th></th>
+            </tr>
+            @for (int i = 0; i < listTimeSheetDetail.Count;i++ )
+            {
+                
+                <tr>
+                    <td>@Html.Label("TimeSheetDetail[" + @i + "].Date", 
+                                      listTimeSheetDetail[i].StartTime.ToString("dd/MM/yyyy"))</td>
+                    <td>@Html.TextBox("TimeSheetDetail[" + @i + "].StartTime", 
+                                      listTimeSheetDetail[i].StartTime.ToString("hh:mm"))</td>
+                    <td>@Html.TextBox("TimeSheetDetail[" + @i + "].CompanyName", 
+                                      listTimeSheetDetail[i].EndTime.ToString("hh:mm"))</td>
+                    <td>@Html.TextBox("TimeSheetDetail[" + @i + "].Remarks", 
+                                      listTimeSheetDetail[i].Remarks)</td>
+                    <td>@Html.TextBox("TimeSheetDetail[" + @i + "].SupportDocument1", 
+                                      listTimeSheetDetail[i].SupportDocument1)</td>
+                </tr>
+            }
+            </table>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
